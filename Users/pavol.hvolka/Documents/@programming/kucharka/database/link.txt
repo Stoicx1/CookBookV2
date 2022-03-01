@@ -1,0 +1,1 @@
+mongodb://Stoicx1:<password>@cluster0-shard-00-00.4ry9c.mongodb.net:27017,cluster0-shard-00-01.4ry9c.mongodb.net:27017,cluster0-shard-00-02.4ry9c.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-114fbl-shard-0&authSource=admin&retryWrites=true&w=majority
