@@ -1,11 +1,25 @@
 
+import React from 'react';
 import './App.css';
+import Main from './pages/Main'
+import AddMaterials from './pages/AddMaterials'
+import RecipeOverview from './pages/RecipeOverview';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import './App.css'
+import Header from './components/Header';
 
-function App() {
+
+const App = () => {
   return (
-    <div className="App">
-      <h1>React App</h1>
-    </div>
+    <BrowserRouter>
+      <Header/>
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/Main" element={<Main />} />
+          <Route path="/AddMaterials" element={<AddMaterials />} />
+          <Route path="/RecipeOverview/:id" element={<RecipeOverview />} />
+        </Routes>
+    </BrowserRouter>
   );
 }
 

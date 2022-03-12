@@ -1,7 +1,341 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Merriweather:wght@300&display=swap');
+
+:root {
+  --primaryColor: deeppink;
+  --dkBg: #303947;
+  --itemBg: #6788a7;
+  --itemBgOdd: darken(#6788a7,15%);
+  --BG: #f5f1ea;
+  --textColor: #332f25;
+  --BG1: #beb7a4;
+  --BG2: #e2d8cf;
+  background-color: white;
+  min-width: 500px;
+}
 
 *{
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: "Sofia", sans-serif;
+  font-family: 'Merriweather', serif;
+}
+
+#main-title {
+  
+}
+
+h1 {
+  font-family: 'Dancing Script', cursive;
+  text-align: center;
+  color: var(--BG1);
+  font-size: 50px;
+}
+
+nav {
+  text-align: center;
+  margin: auto;
+  width: 100%;
+  height: 10px;
+  background: white;
+  margin-top: 1em;
+  padding-bottom: 2em;
+}
+
+.el-nav {
+  margin-top: -10px;
+  width: 150px;
+  display: inline-block;
+  font-size: x-large;
+  text-align: center;
+  padding-top: .5em;
+  color: var(--textColor);
+  text-decoration: none;
+  padding: 10px;
+  border: 2px solid whitesmoke;
+}
+
+.el-nav:hover {
+  color: var(--textColor);
+  background-color: white;
+  border: 1px solid var(--textColor)
+}
+
+#container-content {
+  max-width: 1024px;
+  width: 90%;
+  margin: auto;
+}
+
+.container-content {
+  max-width: 1024px;
+  width: 90%;
+  margin: auto;
+  margin-top: 3em;
+}
+
+#content-wrapper {
+  margin-top: 2em;
+  display: grid;
+  grid-template-columns: repeat(3, 32.5%);  /* 3 columns */
+  grid-template-rows: repeat(2, 370px); /* 3 rows  */
+  grid-gap: 1em; /* 50 pixels of space added between rows and 30 pixels added between columns  */
+}
+@media screen and (max-width: 992px) {
+  #content-wrapper {
+    margin-top: 2em;
+    display: grid;
+    grid-template-columns: repeat(2, 50%);  /* 3 columns */
+    grid-template-rows: repeat(3, 510px); /* 3 rows  */
+    grid-gap: 1em; /* 50 pixels of space added between rows and 30 pixels added between columns  */
+  }
+}
+@media screen and (max-width: 600px) {
+  #content-wrapper {
+    margin-top: 2em;
+    display: grid;
+    grid-template-columns: repeat(1, 100%);  /* 3 columns */
+    grid-template-rows: repeat(6, 500px); /* 3 rows  */
+    grid-gap: 1em; /* 50 pixels of space added between rows and 30 pixels added between columns  */
+  }
+}
+
+.data-field {
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 0 13px 0 rgb(50 50 50 / 25%);
+    border-radius: 20px;
+    text-overflow: ellipsis;
+    color: #3b3a3a;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    overflow: hidden;
+    z-index: 0;
+    position: relative;
+}
+
+.data-field-name {
+  background-color: white;
+  height: 12%;
+  text-align: center;
+  padding-top: .5em;
+  font-size: 15px;
+  font-weight: bold;
+}
+@media screen and (max-width: 992px) {
+  .data-field-name {
+    height: 20%;
+  }
+}
+@media screen and (max-width: 600px) {
+  .data-field-name {
+    height: 7%;
+  }
+}
+
+
+.btn {
+  position: absolute;
+  bottom: 0;
+  z-index: 100;
+  width: 100%;
+  height: 10%;
+  background-color: white;
+  color: var(--textColor);
+  text-align: center;
+  cursor: pointer;
+  padding-top: .7em;
+
+}
+
+.finding-form{
+  background-color: white;
+  width: 15.5%;
+  position: absolute;
+  top: 1em;
+}
+#form {
+  margin: 5%;
+}
+.container-form {
+  display: block;
+  float: left;
+  width: 30%;
+  margin: auto;
+}
+.finding-form input {
+  font-size: xx-large;
+  text-align: center;
+  width: 250px;
+  height: 35px;
+  margin: 2px;
+  border: 1px solid var(--textColor);
+}
+@media screen and (max-width: 992px) {
+  .finding-form{
+    width: 103%;
+
+    position: relative;
+    top: .7em;
+  }
+  .container-form {
+    margin: auto;
+  }
+  .finding-form input {
+    width: 49%;
+    display: block;
+    font-size: xx-large;
+    text-align: center;
+    border: 1px solid var(--textColor);
+  }
+  .input-find {
+    position: relative;
+    top: -0.1em;
+    float: left;
+  }
+}
+@media screen and (max-width: 600px) {
+  .finding-form{
+    width: 101%;
+
+    position: relative;
+    top: 1em;
+  }
+  .container-form {
+    margin: auto;
+  }
+  .finding-form input {
+    width: 49%;
+    display: block;
+    font-size: xx-large;
+    text-align: center;
+    border: 1px solid var(--textColor);
+  }
+  .input-find {
+    float: left;
+  }
+}
+
+
+#container-footer {
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height:75px;   /* Height of the footer */
+  background:var(--dkBg);
+}
+
+#container-footer p {
+  color: white;
+  font-size: x-large;
+  text-align: center;
+  margin-top: 2em;
+}
+
+.demo {
+  position: relative;
+  top: 2em;
+  width: 100%;
+  margin: auto;
+}
+.demo1 {
+  text-align: center;
+  margin: auto;
+}
+.demo a {
+  color: var(--dkBg);
+  padding: 5px 12px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid var(--dkBg);
+  font-size: 18px;
+}
+.demo a.active {
+  background-color: orange;
+  color: white;
+  border-radius: 5px;
+}
+.demo a:hover:not(.active) {
+  color: white;
+  background-color: var(--dkBg);
+}
+.demo a:first-child {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+.demo a:last-child {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+img {
+  z-index: 100;
+  object-fit: cover;
+  width: 100%;
+  height: auto;
+}
+
+#container-icons {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+}
+
+.container-icon {
+  float: right;
+  width: 33.33%;
+  height: 60px;
+  background-color: white;
+  border-bottom: #332f25;
+  border-bottom: 1px solid var(--dkBg);
+}
+
+.material-icons {
+  margin-top: .25em;
+  color: var(--textColor);
+}
+
+
+.overview {
+  display: block;
+  width: 70%;
+}
+.overview h2 {
+  font-family: 'Dancing Script', cursive;
+  text-align: center;
+  color: var(--BG1);
+  font-size: 40px;
+
+}
+.overview img {
+  width: 100%;
+  border-radius: 10px;
+}
+.overview .container-main {
+  display: block;
+}
+.overview .container-img {
+  display: block;
+  margin: auto;
+  width: 50%;
+}
+.overview .container-icons {
+  display: block;
+  margin: auto;
+  width: 50%;
+  height: 70px;
+}
+.overview .container-icon {
+  display: block;
+  margin: auto;
+  width: 33.33%;
+  border: none;
+}
+.overview .container-icon i {
+  margin-left: 43%;
+}
+.overview .container-icon div {
+  text-align: center;
+  font-size: xx-large;
 }
