@@ -14,7 +14,7 @@ saveMaterial.post('/save-material', (req, res) => {
         .then(result => {
             console.log(result)
             res.status(200).json({
-                message: 'Succesfully insterted to DB',
+                message: 'Succesfully insterted to DBs',
                 createdProduct: result
             })
         })
