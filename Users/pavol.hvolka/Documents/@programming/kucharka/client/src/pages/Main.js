@@ -1,6 +1,6 @@
 
 import React, {useState, useEffect} from 'react'
-import Material from '../components/Material'
+import Recipe from '../components/Recipe'
 import PaginationComponent from '../components/PaginationComponent'
 
 const Main = () => {
@@ -12,9 +12,9 @@ const Main = () => {
 
     let i = 0
     
-    let urlGetFind = 'http://localhost:5000/find-materials/'
-    let urlGetAll = 'http://localhost:5000/get-materials/'
-    let urlDelID = 'http://localhost:5000/material/'
+    let urlGetFind = 'http://localhost:5000/find-recipe/'
+    let urlGetAll = 'http://localhost:5000/get-recipe/'
+    let urlDelID = 'http://localhost:5000/recipe/'
 
     // Filter function - GET Request for filter
     const Submit = async event => {
@@ -60,10 +60,6 @@ const Main = () => {
             .catch(err => console.log(err))
     }
 
-    const ShowRecipeOverview = (id) => {
-        //console.log(id)
-    }
-
     // Default first call - getAllData
     useEffect(() => {
         GetAllData()
@@ -83,10 +79,6 @@ const Main = () => {
     const Pagination = (page) => {
         setActPage(page)
     }
-
-    useEffect(() => {
-        //
-    }, [actPage])
 
     useEffect(() => {
         setActPage(1)
@@ -121,10 +113,10 @@ const Main = () => {
             {/* Render data of recipes */}
             <div id='content-wrapper'>
                 {
-                    materials.map((material, index) => {
+                    materials.map((recipe, index) => {
                         if ( index>=(actPage*6-6) && index<(actPage*6) ){
                             return(
-                                <Material eventClick={ShowRecipeOverview} key={index} name={material.name} cisloVPoradi={index} id={material._id} img={material.image} />
+                                <Recipe key={index} name={recipe.name} cisloVPoradi={index} id={recipe._id} img={recipe.image} />
                             )
                         }
                     })

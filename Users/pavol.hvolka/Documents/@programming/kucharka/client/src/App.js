@@ -2,7 +2,7 @@
 import React from 'react';
 import './App.css';
 import Main from './pages/Main'
-import AddMaterials from './pages/AddMaterials'
+import AddRecipe from './pages/AddRecipe'
 import RecipeOverview from './pages/RecipeOverview';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css'
@@ -16,7 +16,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/Main" element={<Main />} />
-          <Route path="/AddMaterials" element={<AddMaterials />} />
+          <Route path="/AddRecipe" element={<AddRecipe />} />
           <Route path="/RecipeOverview/:id" element={<RecipeOverview />} />
         </Routes>
     </BrowserRouter>

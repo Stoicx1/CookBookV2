@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Material = (props) => {
+const Recipe = (props) => {
   return (
     
     <div className='data-field'>
@@ -39,4 +39,4 @@ const Material = (props) => {
   )
 }
 
-export default Material
+export default Recipe

@@ -74,27 +74,27 @@ nav {
 }
 
 #content-wrapper {
-  margin-top: 2em;
+  margin-top: 3em;
   display: grid;
   grid-template-columns: repeat(3, 32.5%);  /* 3 columns */
-  grid-template-rows: repeat(2, 370px); /* 3 rows  */
+  grid-template-rows: repeat(2, 330px); /* 3 rows  */
   grid-gap: 1em; /* 50 pixels of space added between rows and 30 pixels added between columns  */
 }
 @media screen and (max-width: 992px) {
   #content-wrapper {
-    margin-top: 2em;
+    margin-top: 3em;
     display: grid;
     grid-template-columns: repeat(2, 50%);  /* 3 columns */
-    grid-template-rows: repeat(3, 510px); /* 3 rows  */
+    grid-template-rows: repeat(3, 400px); /* 3 rows  */
     grid-gap: 1em; /* 50 pixels of space added between rows and 30 pixels added between columns  */
   }
 }
 @media screen and (max-width: 600px) {
   #content-wrapper {
-    margin-top: 2em;
+    margin-top: 3em;
     display: grid;
     grid-template-columns: repeat(1, 100%);  /* 3 columns */
-    grid-template-rows: repeat(6, 500px); /* 3 rows  */
+    grid-template-rows: repeat(6, 450px); /* 3 rows  */
     grid-gap: 1em; /* 50 pixels of space added between rows and 30 pixels added between columns  */
   }
 }
@@ -102,8 +102,7 @@ nav {
 .data-field {
     width: 100%;
     background-color: white;
-    box-shadow: 0 0 13px 0 rgb(50 50 50 / 25%);
-    border-radius: 20px;
+    box-shadow: 0 0 10px 0 rgb(50 50 50 / 10%);
     text-overflow: ellipsis;
     color: #3b3a3a;
     text-align: center;
@@ -125,7 +124,7 @@ nav {
 }
 @media screen and (max-width: 992px) {
   .data-field-name {
-    height: 20%;
+    height: 10%;
   }
 }
 @media screen and (max-width: 600px) {
@@ -133,7 +132,6 @@ nav {
     height: 7%;
   }
 }
-
 
 .btn {
   position: absolute;
@@ -150,40 +148,37 @@ nav {
 }
 
 .finding-form{
-  background-color: white;
-  width: 15.5%;
-  position: absolute;
-  top: 1em;
-}
-#form {
-  margin: 5%;
+  width: 100%;
+
+  position: relative;
+  top: 2em;
 }
 .container-form {
-  display: block;
-  float: left;
-  width: 30%;
   margin: auto;
 }
 .finding-form input {
+  width: 50%;
+  display: block;
   font-size: xx-large;
   text-align: center;
-  width: 250px;
-  height: 35px;
-  margin: 2px;
   border: 1px solid var(--textColor);
+}
+.input-find {
+  position: relative;
+  float: left;
 }
 @media screen and (max-width: 992px) {
   .finding-form{
-    width: 103%;
+    width: 102%;
 
     position: relative;
-    top: .7em;
+    top: 2em;
   }
   .container-form {
     margin: auto;
   }
   .finding-form input {
-    width: 49%;
+    width: 50%;
     display: block;
     font-size: xx-large;
     text-align: center;
@@ -191,22 +186,20 @@ nav {
   }
   .input-find {
     position: relative;
-    top: -0.1em;
     float: left;
   }
 }
 @media screen and (max-width: 600px) {
   .finding-form{
-    width: 101%;
-
+    width: 100%;
     position: relative;
-    top: 1em;
+    top: 2em;
   }
   .container-form {
     margin: auto;
   }
   .finding-form input {
-    width: 49%;
+    width: 50%;
     display: block;
     font-size: xx-large;
     text-align: center;

@@ -1,17 +1,11 @@
 import React, {useState, useEffect, useRef} from 'react'
 import {Editor} from '@tinymce/tinymce-react'
 
-const AddMaterials = () => {
+const AddRecipe = () => {
 
   const [title, setTitle] = useState('')
   const [image, setImage] = useState('')
   const [descValue, setDescValue] = useState('<p>The quick brown fox jumps over the lazy dog</p>');
-  const [descText, setDescText] = useState('');
-
-  useEffect(() => {
-    console.log(descValue)
-    console.log(descText)
-}, [descValue])
 
   const fetchData = async () => {
     // Request template
@@ -25,7 +19,7 @@ const AddMaterials = () => {
         })
     };
     // Fetch request
-    const response = await fetch('http://localhost:5000/save-material', requestOptions)
+    const response = await fetch('http://localhost:5000/save-recipe', requestOptions)
     const data = await response.json()
   }  
 
@@ -34,20 +28,25 @@ const AddMaterials = () => {
         <h1>AddMaterials</h1>
         <form id='form'>
           <div id='container-form'>
+
+            {/* input for title of recipe */}
             <div>
               Name:
               <input type="text" name="name" onChange={event => setTitle(event.target.value)}  />
             </div>
+
+            {/* Input for image href */}
             <div>
               Image:
               <input type="text" name="image" onChange={event => setImage(event.target.value)}  />
             </div>
+
+            {/* Tiny field for description of recipe */}
             <div>
               <Editor apiKey='mv78nvk6wssh4zua73jgecfypmvns9zkb1y6gfz1hmbwa63v'
                 initialValue="<p>This is initial description of recipe</p>"
                 onEditorChange={(newValue, editor) => {
                   setDescValue(newValue);
-                  setDescText(editor.getContent({format: 'text'}));
                 }}
                 init={{
                   height: 300,
@@ -65,6 +64,8 @@ const AddMaterials = () => {
                 }}
               />
             </div>
+
+            {/* Submit button for confirm to add recipe */}
             <input type="submit" value="Submit" onClick={fetchData} />
           </div>
         </form>
@@ -72,4 +73,4 @@ const AddMaterials = () => {
   )
 }
 
-export default AddMaterials
+export default AddRecipe

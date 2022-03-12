@@ -1,15 +1,15 @@
 const express = require('express')
-const modelMaterial = require('../../models/material')
+const modelRecipe = require('../../models/recipe')
 
-const saveMaterial = express()
+const saveRecipe = express()
 
-saveMaterial.post('/save-material', (req, res) => {
-    const mat = new modelMaterial({
+saveRecipe.post('/save-recipe', (req, res) => {
+    const recipe = new modelRecipe({
         name: req.body.name,
         image: req.body.image,
         describtion: req.body.describtion
     })
-    mat
+    recipe
         .save()
         .then(result => {
             console.log(result)
@@ -26,4 +26,4 @@ saveMaterial.post('/save-material', (req, res) => {
         })
 })
 
-module.exports = saveMaterial
+module.exports = saveRecipe

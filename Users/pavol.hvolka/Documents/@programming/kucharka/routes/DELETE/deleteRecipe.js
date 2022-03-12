@@ -1,9 +1,9 @@
 const express = require('express')
-const modelMaterial = require('../../models/material')
-const deleteMaterial = express()
+const modelRecipe = require('../../models/recipe')
+const deleteRecipe = express()
 
-deleteMaterial.delete('/material/:id', (req, res) => {
-    modelMaterial.findByIdAndDelete({_id: req.params.id})
+deleteRecipe.delete('/recipe/:id', (req, res) => {
+    modelRecipe.findByIdAndDelete({_id: req.params.id})
         .then(result => {
             console.log(result)
             res.status(200).json({
@@ -20,4 +20,4 @@ deleteMaterial.delete('/material/:id', (req, res) => {
 
 })
 
-module.exports = deleteMaterial
+module.exports = deleteRecipe
