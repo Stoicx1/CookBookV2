@@ -3,50 +3,93 @@ import {Editor} from '@tinymce/tinymce-react'
 
 const AddRecipe = () => {
 
-  const [title, setTitle] = useState('')
+  // *********************************************************************************
+  // * UseStates
+  // *********************************************************************************
+  const [name, setName] = useState('')
+  const [subname, setSubname] = useState('')
   const [image, setImage] = useState('')
-  const [descValue, setDescValue] = useState('<p>The quick brown fox jumps over the lazy dog</p>');
+  const [duration, setDuration] = useState(0)
+  const [difficulty, setDifficulty] = useState('')
+  const [description, setDescription] = useState('');
+  const [materials, setMaterials] = useState([])
 
-  const fetchData = async () => {
-    // Request template
+  // *********************************************************************************
+  // * POST Request / post new recipe / On click submit button / event
+  // *********************************************************************************
+  const Submit = async () => {
+    // Post request options
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
-          name: title,
+          name: name,
+          subname: subname,
           image: image,
-          describtion: descValue
+          duration: duration,
+          difficulty: difficulty,
+          describtion: description,
+          materials: materials
         })
     };
-    // Fetch request
+    // Fetch post request
     const response = await fetch('http://localhost:5000/save-recipe', requestOptions)
     const data = await response.json()
   }  
 
+  // *********************************************************************************
+  // * Render page / AddRecipe
+  // *********************************************************************************
   return (
-    <div className='container-content'>
-        <h1>AddMaterials</h1>
-        <form id='form'>
-          <div id='container-form'>
+    <div className='container-content container-content-add-form'>
+        
+        <form id='form' className='add-form'>
+          <div id='contact' className='container-add-form'>
+            
+            <h1>New recipe form</h1>
 
-            {/* input for title of recipe */}
+            <fieldset>
+              <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" onClick={Submit}>Submit</button>
+            </fieldset>
+
+            <fieldset>
+              <input placeholder="Name of recipe" name='name' type="text" tabindex="1"  required onChange={event => setName(event.target.value)}/>
+            </fieldset>
+            <fieldset>
+              <input placeholder="Subname of recipe" type="text" tabindex="2" required/>
+            </fieldset>
+            <fieldset>
+              <input placeholder="Image link" name='image' type="text" tabindex="3"     required onChange={event => setImage(event.target.value)}/>
+            </fieldset>
+            <fieldset>
+              <input placeholder="Duration" type="number" tabindex="4" required/>
+              <input type="radio" name='difficulty' value='easy' id='easy' tabindex="5" />
+              <label for="easy">Easy</label>
+              <input type="radio" name='difficulty' value='medium' id='medium' tabindex="5" />
+              <label for="medium">Medium</label>
+              <input type="radio" name='difficulty' value='hard' id='hard' tabindex="5" />
+              <label for="hard">Hard</label>
+            </fieldset>
+            
+
+            {/* input for title of recipe
             <div>
               Name:
-              <input type="text" name="name" onChange={event => setTitle(event.target.value)}  />
+              <input type="text" name="name" onChange={event => setName(event.target.value)}  />
             </div>
 
-            {/* Input for image href */}
             <div>
               Image:
               <input type="text" name="image" onChange={event => setImage(event.target.value)}  />
-            </div>
+            </div> */}
 
             {/* Tiny field for description of recipe */}
             <div>
-              <Editor apiKey='mv78nvk6wssh4zua73jgecfypmvns9zkb1y6gfz1hmbwa63v'
+              <Editor
+                apiKey='mv78nvk6wssh4zua73jgecfypmvns9zkb1y6gfz1hmbwa63v'
                 initialValue="<p>This is initial description of recipe</p>"
                 onEditorChange={(newValue, editor) => {
-                  setDescValue(newValue);
+                  setDescription(newValue);
                 }}
                 init={{
                   height: 300,
@@ -66,7 +109,7 @@ const AddRecipe = () => {
             </div>
 
             {/* Submit button for confirm to add recipe */}
-            <input type="submit" value="Submit" onClick={fetchData} />
+            {/* <input type="submit" value="Submit" onClick={Submit} /> */}
           </div>
         </form>
     </div>
