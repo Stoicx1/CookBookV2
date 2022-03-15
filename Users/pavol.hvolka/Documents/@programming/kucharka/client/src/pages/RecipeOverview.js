@@ -5,9 +5,15 @@ import { useParams } from 'react-router-dom';
 
 const RecipeOverview = () => {
 
+  // *********************************************************************************
+  // * UseStates
+  // *********************************************************************************
   const [recipe, SetRecipe] = useState([])
   const { id } = useParams();
 
+  // *********************************************************************************
+  // * Get Request / Get recibe by :id param 
+  // *********************************************************************************
   useEffect(() => {
     fetch('http://localhost:5000/RecipeOverview/' + id)
       .then(res => res.json())
@@ -15,12 +21,14 @@ const RecipeOverview = () => {
         SetRecipe(data)
       })
   }, [])
-
+  // show recipe data to console
   useEffect(() => {
     console.log(recipe)
   }, [recipe])
 
-
+  // *********************************************************************************
+  // * Render page / View of choosen recipe from the main list 
+  // *********************************************************************************
   return (
     <div className='container-content overview' > 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
@@ -50,6 +58,7 @@ const RecipeOverview = () => {
         </div>  
       </div>
       
+      {/* Show recipe description from HTML format / Parsing data */}
       <div>
         <p>{ ReactHtmlParser(recipe.describtion) }</p>
       </div>

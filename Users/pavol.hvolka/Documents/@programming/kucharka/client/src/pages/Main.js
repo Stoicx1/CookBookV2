@@ -5,18 +5,24 @@ import PaginationComponent from '../components/PaginationComponent'
 
 const Main = () => {
 
-    const [materials, SetMaterials] = useState([])
-    const [toFind, SetToFind] = useState('')
-    const [pages, setPages] = useState([])
-    const [actPage, setActPage] = useState(0)
-
-    let i = 0
-    
+    // *********************************************************************************
+    // * Variables
+    // *********************************************************************************
     let urlGetFind = 'http://localhost:5000/find-recipe/'
     let urlGetAll = 'http://localhost:5000/get-recipe/'
     let urlDelID = 'http://localhost:5000/recipe/'
 
-    // Filter function - GET Request for filter
+    // *********************************************************************************
+    // * UseStates
+    // *********************************************************************************
+    const [materials, SetMaterials] = useState([])
+    const [toFind, SetToFind] = useState('')
+    const [pages, setPages] = useState([])
+    const [actPage, setActPage] = useState(0)
+    
+    // *********************************************************************************
+    // * GET Request / Filter data / List filtered recipes
+    // *********************************************************************************
     const Submit = async event => {
         event.preventDefault();
         fetch(urlGetFind+toFind)
@@ -36,7 +42,9 @@ const Main = () => {
             })
     }
 
-    // Get all data - GET Request
+    // *********************************************************************************
+    // * GET Request / Get all data / Full list of recipes from MongoDB
+    // *********************************************************************************
     const GetAllData = event => {
         fetch(urlGetAll)
             .then(res => res.json())
@@ -46,7 +54,9 @@ const Main = () => {
             })
     }
     
-    // Remove data - DELETE Request
+    // *********************************************************************************
+    // * DELETE Request
+    // *********************************************************************************
     const RemoveDataID = (id) => {
         const requestOptions = {
             method: 'DELETE',
@@ -60,13 +70,17 @@ const Main = () => {
             .catch(err => console.log(err))
     }
 
-    // Default first call - getAllData
+    // *********************************************************************************
+    // * Init call / Get all recipes 
+    // *********************************************************************************
     useEffect(() => {
         GetAllData()
         setActPage(1)
     }, [])
 
-    // *** Pagination ***
+    // *********************************************************************************
+    // * Logic of the pagination
+    // *********************************************************************************
     useEffect(() => {
         let arr = []
         let pages = Math.ceil(materials.length/6)
@@ -84,11 +98,9 @@ const Main = () => {
         setActPage(1)
     }, [toFind])
 
-    
-
-    // *************************************************************
-    // *** Rendering data
-    // *************************************************************
+    // *********************************************************************************
+    // * Render page / Main / List of recipes 
+    // *********************************************************************************
     return (
         <div id='container-content'>
 

@@ -6,8 +6,12 @@ const saveRecipe = express()
 saveRecipe.post('/save-recipe', (req, res) => {
     const recipe = new modelRecipe({
         name: req.body.name,
+        subname: 'subname',
         image: req.body.image,
-        describtion: req.body.describtion
+        duration: 10,
+        difficulty: 'Easy',
+        describtion: req.body.describtion,
+        materials: [{vodka: '2cl'}, {citron: '1pcs'}]
     })
     recipe
         .save()
