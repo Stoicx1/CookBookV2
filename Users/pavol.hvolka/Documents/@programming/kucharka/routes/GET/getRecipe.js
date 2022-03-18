@@ -7,7 +7,7 @@ const getRecipe = express()
 getRecipe.get('/get-recipe', (req, res) => {
     modelRecipe.find({}, function(err, recipes) {
         if (!err) {
-            console.log('Succesfully returned all materials')
+            console.log('Succesfully returned all recipes')
             res.send(recipes)
         } else {
             res.send(err)

@@ -11,7 +11,8 @@ saveRecipe.post('/save-recipe', (req, res) => {
         duration: 10,
         difficulty: 'Easy',
         describtion: req.body.describtion,
-        materials: [{vodka: '2cl'}, {citron: '1pcs'}]
+        //materials: [{vodka: '2cl'}, {citron: '1pcs'}]
+        materials: req.body.materials
     })
     recipe
         .save()
