@@ -11,7 +11,7 @@
   --BG1: #beb7a4;
   --BG2: #e2d8cf;
   background-color: white;
-  min-width: 500px;
+  min-width: 470px;
 }
 
 *{
@@ -21,45 +21,79 @@
   font-family: 'Merriweather', serif;
 }
 
-#main-title {
-  
-}
-
-h1 {
-  font-family: 'Dancing Script', cursive;
-  text-align: center;
-  color: var(--BG1);
-  font-size: 50px;
-}
-
-nav {
-  text-align: center;
+#header-container {
   margin: auto;
-  width: 100%;
-  height: 10px;
-  background: white;
-  margin-top: 1em;
-  padding-bottom: 2em;
+  margin-top: 10px;
+  max-width: 1024px;
+  height: 80px;
 }
-
+#header-container img {
+  width: 80px;
+  float: left;
+}
+#header-container h1 {
+  font-family: 'Merriweather', serif;
+  font-size: xx-large;
+  text-align: left;
+  margin-left: 10px;
+  padding-top: 15px;
+  font-family: 'Dancing Script', 'Arial Narrow', Arial, sans-serif;
+  font-size: 50px;
+  width: 270px;
+  height: 80px;
+  float: left;
+}
+nav {
+  padding-top: 20px;
+  font-size: 20px;
+}
 .el-nav {
-  margin-top: -10px;
-  width: 150px;
-  display: inline-block;
-  font-size: x-large;
+  float: right;
+  flex: auto;
   text-align: center;
-  padding-top: .5em;
-  color: var(--textColor);
+  padding: 7px;
+  width: 140px;
+  margin: 5px;
   text-decoration: none;
-  padding: 10px;
-  border: 2px solid whitesmoke;
+  border: 1px solid var(--BG1);
+  color: var(--textColor)
+}
+.el-nav:hover {
+  border: 1px solid var(--textColor);
+}
+@media screen and (max-width: 700px) {
+  nav {
+    position: absolute;
+    justify-self: center;
+    right: 40px;
+    font-size: 12px;
+  }
+  .el-nav {
+    float: right;
+    flex: auto;
+    text-align: center;
+    padding: 10px;
+    width: 117px;
+    margin: 5px;
+    text-decoration: none;
+    border: 1px solid var(--BG1);
+    color: var(--textColor)
+  }
+  .el-nav1 {
+    position: absolute;
+    top: -4px;
+    left: -110px;
+  }
+  .el-nav2 {
+    position: absolute;
+    top: 37px;
+    left: -110px;
+  }
 }
 
-.el-nav:hover {
-  color: var(--textColor);
-  background-color: white;
-  border: 1px solid var(--textColor)
-}
+
+
+
 
 #container-content {
   max-width: 1024px;
@@ -78,7 +112,7 @@ nav {
   margin-top: 3em;
   display: grid;
   grid-template-columns: repeat(3, 32.5%);  /* 3 columns */
-  grid-template-rows: repeat(2, 330px); /* 3 rows  */
+  grid-template-rows: repeat(2, auto); /* 3 rows  */
   grid-gap: 1em; /* 50 pixels of space added between rows and 30 pixels added between columns  */
 }
 @media screen and (max-width: 992px) {
@@ -86,7 +120,7 @@ nav {
     margin-top: 3em;
     display: grid;
     grid-template-columns: repeat(2, 50%);  /* 3 columns */
-    grid-template-rows: repeat(3, 400px); /* 3 rows  */
+    grid-template-rows: repeat(3, auto); /* 3 rows  */
     grid-gap: 1em; /* 50 pixels of space added between rows and 30 pixels added between columns  */
   }
 }
@@ -95,34 +129,47 @@ nav {
     margin-top: 3em;
     display: grid;
     grid-template-columns: repeat(1, 100%);  /* 3 columns */
-    grid-template-rows: repeat(6, 450px); /* 3 rows  */
+    grid-template-rows: repeat(6, auto); /* 3 rows  */
     grid-gap: 1em; /* 50 pixels of space added between rows and 30 pixels added between columns  */
   }
 }
 
 .data-field {
     width: 100%;
+    height: auto;
     background-color: white;
-    box-shadow: 0 0 10px 0 rgb(50 50 50 / 10%);
+    box-shadow: 0 0 5px 0 rgb(50 50 50 / 40%);
     text-overflow: ellipsis;
     color: #3b3a3a;
     text-align: center;
-    text-decoration: none;
+    /* text-decoration: none; */
     font-weight: 700;
     font-size: 1.1rem;
     overflow: hidden;
     z-index: 0;
     position: relative;
 }
+.data-field, a:link, a:visited {
+  text-decoration: none;
+}
 
 .data-field-name {
   background-color: white;
   height: 12%;
   text-align: center;
-  padding-top: .5em;
+  padding-top: .25em;
   font-size: 15px;
   font-weight: bold;
 }
+.data-field-subname {
+  background-color: white;
+  height: 12%;
+  text-align: center;
+  padding-top: .25em;
+  font-size: 10px;
+  font-weight: lighter;
+}
+
 @media screen and (max-width: 992px) {
   .data-field-name {
     height: 10%;
@@ -134,7 +181,7 @@ nav {
   }
 }
 
-.btn {
+/* .btn {
   position: absolute;
   bottom: 0;
   z-index: 100;
@@ -145,12 +192,11 @@ nav {
   text-align: center;
   cursor: pointer;
   padding-top: .7em;
-
-}
+} */
 
 .finding-form{
   width: 100%;
-
+  height: 40px;
   position: relative;
   top: 2em;
 }
@@ -158,15 +204,29 @@ nav {
   margin: auto;
 }
 .finding-form input {
-  width: 50%;
   display: block;
   font-size: xx-large;
   text-align: center;
-  border: 1px solid var(--textColor);
+  border: 1px solid var(--BG1);
 }
 .input-find {
+  width: 69.5%;
   position: relative;
   float: left;
+}
+.input-find:hover {
+  border: 1px solid var(--textColor);
+}
+.input-submit {
+  width: 30%;
+  background-color: white;
+  float: right;
+  margin-left: 2px;
+  font-size: 12px;
+}
+.input-submit:hover {
+  border: 1px solid var(--textColor);
+  cursor: pointer;
 }
 @media screen and (max-width: 992px) {
   .finding-form{
@@ -179,15 +239,25 @@ nav {
     margin: auto;
   }
   .finding-form input {
-    width: 50%;
     display: block;
     font-size: xx-large;
     text-align: center;
-    border: 1px solid var(--textColor);
+    border: 1px solid var(--BG1);
   }
   .input-find {
     position: relative;
     float: left;
+  }
+  .input-find {
+    width: 69.5%;
+    position: relative;
+    float: left;
+  }
+  .input-submit {
+    width: 30%;
+    background-color: white;
+    float: right;
+    margin-left: 2px;
   }
 }
 @media screen and (max-width: 600px) {
@@ -200,14 +270,24 @@ nav {
     margin: auto;
   }
   .finding-form input {
-    width: 50%;
     display: block;
     font-size: xx-large;
     text-align: center;
-    border: 1px solid var(--textColor);
+    border: 1px solid var(--BG1);
   }
   .input-find {
     float: left;
+  }
+  .input-find {
+    width: 69.5%;
+    position: relative;
+    float: left;
+  }
+  .input-submit {
+    width: 30%;
+    background-color: white;
+    float: right;
+    margin-left: 2px;
   }
 }
 
@@ -281,8 +361,8 @@ img {
   width: 33.33%;
   height: 60px;
   background-color: white;
-  border-bottom: #332f25;
-  border-bottom: 1px solid var(--dkBg);
+  /* border-bottom: #332f25;
+  border-bottom: 1px solid var(--dkBg); */
 }
 
 .material-icons {
@@ -396,7 +476,7 @@ img {
 
 fieldset {
   border: medium none !important;
-  margin: 0 0 5px;
+  margin: 0 0 0px;
   min-width: 100%;
   padding: 0;
   width: 100%;
@@ -408,7 +488,7 @@ fieldset {
   border: 1px solid #ccc;
   background: #FFF;
   margin: 0 0 5px;
-  padding: 10px;
+  padding: 5px;
 }
 #contact input[type="number"] {
   position: relative;
@@ -420,7 +500,7 @@ fieldset {
   border: 1px solid #ccc;
   background: #FFF;
   margin: 0 0 5px;
-  padding: 10px;
+  padding: 5px;
   float: left;
 }
 
@@ -441,18 +521,16 @@ fieldset {
   resize: none;
 }
 
-
-
 #contact input[type="radio"] {
   width: 25px;
-  height: 25px;
-  margin-top: 7px;
+  height: 20px;
+  margin-top: 5px;
   margin-left: 30px;
   
 }
 #contact label {
   position: relative;
-  top: -6px;
+  top: -3px;
   font-size: larger;
   margin-left: 2px;
   padding: 5px;
@@ -465,7 +543,7 @@ fieldset {
   background: var(--BG1);
   color: var(--textColor);
   margin: 0 0 7px;
-  padding: 10px;
+  padding: 7px;
   font-size: 15px;
 }
 
@@ -502,3 +580,109 @@ fieldset {
 :-ms-input-placeholder {
   color: #888;
 }
+
+#container-material-input {
+  align-content: space-around;
+}
+
+#material-input {
+  display: inline-flex;
+  width: auto;
+  color: var(--textColor);
+  padding: 0px 10px 0px 10px;
+  cursor: pointer;
+  border: 1px solid var(--BG1);
+  margin: 2px;
+}
+
+
+
+
+
+
+.field {
+  padding: .5em;
+  display: inline-flex;
+  width: 33.33%;
+  height: 41px;
+  overflow: hidden;
+  margin: 0;
+}
+.field .ingredient-name {
+  width: 500px;
+  text-align: end;
+  padding-top: .4em;
+  padding-right: .5em;
+}
+.field .ingredient-amount {
+  height: 35px;
+}
+.field .ingredient-type {
+  height: 35px;
+  width: 100px;
+  font-size: larger;
+  padding: 5px;
+  margin-left: 5px;
+  border-radius: 0%;
+  border: 1px solid #bbb;
+}
+.field .material-icons {
+  position: relative;
+  top: -1px;
+  left: 2px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1024px) {
+  .field {
+    padding: .5em;
+    display: inline-flex;
+    width: 50%;
+    height: auto;
+    overflow: hidden;
+  }
+  .field .ingredient-name {
+    width: 500px;
+    text-align: end;
+    padding-top: .4em;
+    padding-right: .5em;
+  }
+  .field .ingredient-amount {
+    height: 40px;
+  }
+  .field .ingredient-type {
+    height: 40px;
+    width: 100px;
+    font-size: larger;
+    padding: 5px;
+    margin-left: 5px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .field {
+    padding: .5em;
+    display: inline-flex;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+  }
+  .field .ingredient-name {
+    width: 500px;
+    text-align: end;
+    padding-top: .4em;
+    padding-right: .5em;
+  }
+  .field .ingredient-amount {
+    height: 40px;
+  }
+  .field .ingredient-type {
+    height: 40px;
+    width: 100px;
+    font-size: larger;
+    padding: 5px;
+    margin-left: 5px;
+  }
+}
+
+

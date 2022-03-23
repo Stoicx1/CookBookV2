@@ -9,11 +9,13 @@ const RecipeOverview = () => {
   // * UseStates
   // *********************************************************************************
   const [recipe, SetRecipe] = useState([])
+  const [refreshBit, SetRefreshBit] = useState(false)
   const { id } = useParams();
 
   // *********************************************************************************
   // * Get Request / Get recibe by :id param 
   // *********************************************************************************
+  
   useEffect(() => {
     fetch('http://localhost:5000/RecipeOverview/' + id)
       .then(res => res.json())
@@ -21,10 +23,36 @@ const RecipeOverview = () => {
         SetRecipe(data)
       })
   }, [])
-  // show recipe data to console
+
   useEffect(() => {
-    console.log(recipe)
-  }, [recipe])
+    fetch('http://localhost:5000/RecipeOverview/' + id)
+      .then(res => res.json())
+      .then(data => {
+        SetRecipe(data)
+        SetRefreshBit(false)
+      })
+  }, [refreshBit])
+
+  // *********************************************************************************
+  // * POST Req - Update like_cnt couter in mongodb
+  // *********************************************************************************
+  
+  const LikeMe = async () => {
+    // Post request options
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          like_cnt: recipe.like_cnt+1
+        })
+    };
+    // Fetch post request
+    fetch('http://localhost:5000/like-recipe/'+recipe._id, requestOptions)
+      .then(() => {
+        SetRefreshBit(true)
+      })
+      
+  }  
 
   // *********************************************************************************
   // * Render page / View of choosen recipe from the main list 
@@ -34,6 +62,8 @@ const RecipeOverview = () => {
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
 
       <h2>{recipe.name}</h2>
+      <h2>{recipe.subName}</h2>
+      <br></br>
 
       <div className='container-main'>
         {/* image */}
@@ -43,24 +73,33 @@ const RecipeOverview = () => {
         
         {/* params of recipe */}
         <div  className='container-icons'>
+
           <div className='container-icon'>
             <i className="material-icons">&#xe855;</i>
-            <div>20min</div>
+            <div>{recipe.duration+'min'}</div>
           </div>
+
           <div className='container-icon'>
             <i className="material-icons">&#xe7ef;</i>
-            <div>2pcs</div>
+            <div>{recipe.like_cnt}</div>
           </div>
+
           <div className='container-icon'>
             <i className="material-icons">&#xea3c;</i>
-            <div>Easy</div>
+            <div>{recipe.difficulty}</div>
           </div>
+
         </div>  
       </div>
       
       {/* Show recipe description from HTML format / Parsing data */}
       <div>
         <p>{ ReactHtmlParser(recipe.describtion) }</p>
+      </div>
+
+      {/* Show recipe description from HTML format / Parsing data */}
+      <div>
+        <button onClick={event => LikeMe()} >Like me</button>
       </div>
 
     </div>

@@ -5,14 +5,14 @@ const saveRecipe = express()
 
 saveRecipe.post('/save-recipe', (req, res) => {
     const recipe = new modelRecipe({
-        name: req.body.name,
-        subname: 'subname',
-        image: req.body.image,
-        duration: 10,
-        difficulty: 'Easy',
-        describtion: req.body.describtion,
-        //materials: [{vodka: '2cl'}, {citron: '1pcs'}]
-        materials: req.body.materials
+        name:           req.body.name,
+        subname:        req.body.subname,
+        image:          req.body.image,
+        duration:       req.body.duration,
+        like_cnt:       req.body.like_cnt,
+        difficulty:     req.body.difficulty,
+        describtion:    req.body.describtion,
+        materials:      req.body.materials
     })
     recipe
         .save()

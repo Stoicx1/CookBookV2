@@ -42,6 +42,28 @@ const Main = () => {
             })
     }
 
+    const AutoFind = () => {
+        fetch(urlGetFind+toFind)
+            .then(res => {
+                if (res.ok) {
+                    return res.json()
+                } 
+                GetAllData()
+                throw new Error('Something went wrong')
+            })
+            .then(data => {
+                console.log(data)
+                SetMaterials(data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
+    useEffect(() => {
+        AutoFind()
+    }, [toFind])
+
     // *********************************************************************************
     // * GET Request / Get all data / Full list of recipes from MongoDB
     // *********************************************************************************
@@ -108,10 +130,10 @@ const Main = () => {
             <div className='finding-form'>
                 <form  onSubmit={Submit}>
                     <div>
-                        <input className='input-find' type="text" name="name" onChange={event => SetToFind(event.target.value)} />
+                        <input placeholder='Search recipes' className='input-find' type="text" name="d" autocomplete="off" onChange={event => SetToFind(event.target.value)}  />
                     </div>
                     <div>
-                        <input type="submit" name="submit" />
+                        <input className='input-submit' type="submit" name="submit" />
                     </div>    
                         
                 </form>
@@ -128,7 +150,7 @@ const Main = () => {
                     materials.map((recipe, index) => {
                         if ( index>=(actPage*6-6) && index<(actPage*6) ){
                             return(
-                                <Recipe key={index} name={recipe.name} cisloVPoradi={index} id={recipe._id} img={recipe.image} />
+                                <Recipe key={index} name={recipe.name} subname={recipe.subname} cisloVPoradi={index} id={recipe._id} img={recipe.image} duration={recipe.duration} like_cnt={recipe.like_cnt} difficulty={recipe.difficulty} />
                             )
                         }
                     })

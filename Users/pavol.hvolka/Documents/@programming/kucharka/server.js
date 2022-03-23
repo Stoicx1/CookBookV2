@@ -9,7 +9,8 @@ const getRecipeById = require('./routes/GET/getRecipeById')
 const findRecipe = require('./routes/GET/findRecipe')
 const saveRecipe = require('./routes/POST/saveRecipe')
 const saveMaterial = require('./routes/POST/saveMaterial')
-const deleteRecipe = require('./routes/DELETE/deleteRecipe')
+const deleteRecipe = require('./routes/DELETE/deleteRecipe');
+const likeRecipe = require('./routes/PUT/likeRecipe');
 
 dbConnect.connectToMongoDB()
 
@@ -23,6 +24,8 @@ app.use('/', getRecipeById)
 
 app.use('/', saveMaterial)
 app.use('/', getMaterial)
+
+app.use('/', likeRecipe)
 
 
 app.get('/', (request, response) => {

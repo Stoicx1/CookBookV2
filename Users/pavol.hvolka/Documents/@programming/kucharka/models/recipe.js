@@ -7,12 +7,18 @@ const recipeSchema = new mongoose.Schema({
     subname: String,
     image: String,
     duration: Number,
+    like_cnt: Number,
     difficulty: String,
     describtion: String,
     materials: 
         [{
-            amount: String,
-            ingredient: {type: ObjectId,ref: 'Material'}
+            matName: String,
+            matType: String,
+            matAmount: Number,
+            ingredient: {
+                type: ObjectId,
+                ref: 'Material'
+            }
         }]
 })
 

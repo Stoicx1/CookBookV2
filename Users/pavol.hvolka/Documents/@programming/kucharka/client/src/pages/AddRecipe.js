@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {Editor} from '@tinymce/tinymce-react'
 
 const AddRecipe = () => {
@@ -14,6 +14,8 @@ const AddRecipe = () => {
   const [description, setDescription] = useState('');
   const [materials, setMaterials] = useState([])
 
+  const [materialShowList, setMaterialShowList] = useState([])
+
   // *********************************************************************************
   // * POST Request / post new recipe / On click submit button / event
   // *********************************************************************************
@@ -27,6 +29,7 @@ const AddRecipe = () => {
           subname: subname,
           image: image,
           duration: duration,
+          like_cnt: 0,
           difficulty: difficulty,
           describtion: description,
           materials: materials
@@ -37,11 +40,46 @@ const AddRecipe = () => {
     const data = await response.json()
   }  
 
+  useEffect( () => {
+    fetch('http://localhost:5000/get-material')
+      .then(res => res.json())
+      .then(data => {
+        setMaterialShowList(data)
+      })
+  }, [])
+
+  // *********************************************************************************
+  // * Updating material values
+  // *********************************************************************************
+  const AddIngredientToRecipe = (id, name, amount) => {
+    setMaterials([...materials, { ingredient: id, matName: name, matAmount: 0, matType: 'pcs' }])
+  }
+  const UpdateMaterialsAmount = (index) => event => {
+    let newArr = [...materials]
+    newArr[index].matAmount = Number(event.target.value)
+    setMaterials(newArr)
+    console.log(materials)
+  }
+  const UpdateMaterialsType = (index) => event => {
+    let newArr = [...materials]
+    newArr[index].matType = event.target.value
+    setMaterials(newArr)
+    console.log(materials)
+  }
+  const DeleteRecipeMaterial = (index) => event => {
+    let newArr = [...materials]
+    newArr.splice(0, 1)
+    setMaterials(newArr)
+  }
+
   // *********************************************************************************
   // * Render page / AddRecipe
   // *********************************************************************************
   return (
     <div className='container-content container-content-add-form'>
+      {/* import icons google */}
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
+
         
         <form id='form' className='add-form'>
           <div id='contact' className='container-add-form'>
@@ -53,35 +91,23 @@ const AddRecipe = () => {
             </fieldset>
 
             <fieldset>
-              <input placeholder="Name of recipe" name='name' type="text" tabindex="1"  required onChange={event => setName(event.target.value)}/>
+              <input placeholder="Name of recipe" name='name' type="text" tabIndex="1"  required onChange={event => setName(event.target.value)}/>
             </fieldset>
             <fieldset>
-              <input placeholder="Subname of recipe" type="text" tabindex="2" required/>
+              <input placeholder="Subname of recipe" type="text" tabIndex="2" required onChange={event => setSubname(event.target.value)}/>
             </fieldset>
             <fieldset>
-              <input placeholder="Image link" name='image' type="text" tabindex="3"     required onChange={event => setImage(event.target.value)}/>
+              <input placeholder="Image link" name='image' type="text" tabIndex="3"     required onChange={event => setImage(event.target.value)}/>
             </fieldset>
             <fieldset>
-              <input placeholder="Duration" type="number" tabindex="4" required/>
-              <input type="radio" name='difficulty' value='easy' id='easy' tabindex="5" />
-              <label for="easy">Easy</label>
-              <input type="radio" name='difficulty' value='medium' id='medium' tabindex="5" />
-              <label for="medium">Medium</label>
-              <input type="radio" name='difficulty' value='hard' id='hard' tabindex="5" />
-              <label for="hard">Hard</label>
+              <input placeholder="Duration" type="number" tabIndex="4" required onChange={event => setDuration(event.target.value)}/>
+              <input type="radio" name='difficulty' value='easy' id='easy' tabIndex="5" onClick={event => setDifficulty(event.target.value)} />
+              <label  htmlFor="easy">Easy</label>
+              <input type="radio" name='difficulty' value='medium' id='medium' tabIndex="5" onClick={event => setDifficulty(event.target.value)} />
+              <label htmlFor="medium">Medium</label>
+              <input type="radio" name='difficulty' value='hard' id='hard' tabIndex="5" onClick={event => setDifficulty(event.target.value)} />
+              <label htmlFor="hard">Hard</label>
             </fieldset>
-            
-
-            {/* input for title of recipe
-            <div>
-              Name:
-              <input type="text" name="name" onChange={event => setName(event.target.value)}  />
-            </div>
-
-            <div>
-              Image:
-              <input type="text" name="image" onChange={event => setImage(event.target.value)}  />
-            </div> */}
 
             {/* Tiny field for description of recipe */}
             <div>
@@ -92,7 +118,7 @@ const AddRecipe = () => {
                   setDescription(newValue);
                 }}
                 init={{
-                  height: 300,
+                  height: 250,
                   menubar: false,
                   plugins: [
                     'advlist autolink lists link image charmap print preview anchor',
@@ -108,10 +134,47 @@ const AddRecipe = () => {
               />
             </div>
 
-            {/* Submit button for confirm to add recipe */}
-            {/* <input type="submit" value="Submit" onClick={Submit} /> */}
+            {/* Ingredients list */}
+            <div id='container-field-ingredient'>
+              {
+                materials.map((material, index) => {
+                  return (
+                    <div key={material.matName+index}  className='field'>
+                      <div     key={'name'+index}   className='ingredient-name'   htmlFor="hard">{material.matName}</div>
+                      <input   key={'amount'+index} className='ingredient-amount' placeholder='amount' type="number" name='amount' onChange={UpdateMaterialsAmount(index)}/>
+                      <select  key={'opt'+index} className="ingredient-type" name="cars" defaultValue={'pcs'} onChange={UpdateMaterialsType(index)} >
+                        <option value="ml" >ml</option>
+                        <option value="dl" >dl</option>
+                        <option value="l"  >l</option>
+                        <option value="g"  >g</option>
+                        <option value="dg" >dg</option>
+                        <option value="kg" >kg</option>
+                        <option value="PL" >PL</option>
+                        <option value="CL" >CL</option>
+                        <option value="pcs">pcs</option>
+                      </select>
+                      <i key={'icon'+index} className="material-icons" onClick={DeleteRecipeMaterial(index)} >delete</i>
+                    </div>
+                  )
+                })
+              }
+            </div>
+
           </div>
         </form>
+        
+        <div id='container-material-input'>
+          {
+            materialShowList.map((material, index) => {
+              return (
+                <div id='material-input'  value={material._id} name={material.name}  key={index} 
+                onClick={() => AddIngredientToRecipe(material._id, material.name, material.amount)}>{material.name}
+                </div>
+              )
+            })
+          }  
+        </div>
+        
     </div>
   )
 }

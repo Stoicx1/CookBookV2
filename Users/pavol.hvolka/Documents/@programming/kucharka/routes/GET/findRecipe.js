@@ -9,7 +9,8 @@ findRecipe.get('/find-recipe/:Param1', (req, res) => {
     const param = req.params.Param1
     console.log(query)
     console.log(param)
-    modelRecipe.find({name: param}, function(err, foundMaterials) {
+    //modelRecipe.find({name: param}, function(err, foundMaterials) {
+    modelRecipe.find( { 'materials.matName': {$regex: param }}, function(err, foundMaterials) {
         if (!err) {
             console.log('Succesfully returned all materials')
             res.send(foundMaterials)
