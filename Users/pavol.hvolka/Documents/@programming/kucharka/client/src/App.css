@@ -371,33 +371,113 @@ img {
 }
 
 
+
+
 .overview {
   display: block;
   width: 70%;
+}
+.overview h1 {
+  font-family: 'Dancing Script', cursive;
+  text-align: center;
+  color: var(--BG1);
+  font-size: 40px;
 }
 .overview h2 {
   font-family: 'Dancing Script', cursive;
   text-align: center;
   color: var(--BG1);
-  font-size: 40px;
-
+  font-size: 30px;
+  margin-bottom: 1em;
 }
 .overview img {
   width: 100%;
   border-radius: 10px;
 }
 .overview .container-main {
+  height: auto;
+  position:  relative;
+  overflow: hidden;
+
+}
+.overview .container-ingredient {
   display: block;
+  width: 100%;
+  height: auto;
+  margin: auto;
+  padding-top: 2em;
+  font-size: 16px;
+}
+.overview .container-ingredient th {
+  padding-top: .5em;
+  padding-bottom: .5em;
+  border-bottom: 1px solid var(--BG1);
+}
+.overview .container-ingredient .th1 {
+  padding-left: 1em;
+  text-align: left;
+  width: 80%;
+}
+.overview .container-ingredient .th2 {
+  text-align: right;
+  padding-right: 1em;
+  width: 20%;
+}
+.overview .container-ingredient .th3 {
+  text-align: left;
+  width: 20%;
+}
+.overview .container-main .left {
+  width: 49.99%;
+  float: left;
+  height: auto;
+}
+.overview .container-main .right {
+  width: 49.99%;
+  float: right;
+  height: auto;
+  padding-left: 3em;
+}
+.overview .container-main .right p li {
+  font-size: larger;
+  margin-bottom: 1em;
+}
+.overview .container-main .btn {
+  width: 130px;
+  height: 50px;
+  margin: auto;
+}
+.overview .container-main button {
+  width: 130px;
+  height: 50px;
+  margin: auto;
+  margin-top: 1em;
+  border: 1px solid white;
+  background-color: var(--BG1);
+  color: white;
+  font-size: 20px;
+  
+}
+.overview .container-main button:hover {
+  width: 130px;
+  height: 50px;
+  margin: auto;
+  margin-top: 1em;
+  border: 1px solid var(--textColor);
+  background-color: white;
+  color: var(--textColor);
+  font-size: 20px;
 }
 .overview .container-img {
   display: block;
   margin: auto;
-  width: 50%;
+  width: 100%;
+  height: auto;
 }
 .overview .container-icons {
   display: block;
   margin: auto;
-  width: 50%;
+  width: 100%;
   height: 70px;
 }
 .overview .container-icon {
@@ -413,6 +493,25 @@ img {
   text-align: center;
   font-size: xx-large;
 }
+
+@media screen and (max-width: 992px) {
+  .overview .container-main {
+    overflow: visible;
+    
+  }
+  .overview .container-main .left {
+    width: 100%;
+    float: left;
+  }
+  .overview .container-main .right {
+    padding-top: 2em;
+    width: 100%;
+    float: right;
+    padding-left: 3em;
+  }
+}
+
+
 
 /* 
   *****************************************
@@ -682,6 +781,60 @@ fieldset {
     font-size: larger;
     padding: 5px;
     margin-left: 5px;
+  }
+}
+
+
+
+
+.container-fav-recipes {
+  position: fixed;
+  top: 165px;
+  left: 0;
+  
+  width: 19%;
+  height: auto;
+  padding-left: 1em;
+  font-family: 'Merriweather', serif;
+}
+.container-top10-element {
+  display: inline-flex;
+  margin-bottom: 10px;
+}
+.container-fav-recipes h1 {
+  text-align: center;
+  padding-bottom: .5em;
+  color: var(--textColor);
+}
+.container-fav-recipes img {
+  width: 130px;
+}
+.container-top10-description {
+  width: 70%;
+  padding: .5em;
+  overflow: hidden;
+}
+.top10-description {
+  color: var(--textColor);
+}
+.like {
+  float: left;
+}
+.like-cnt {
+  padding-top: .75em;
+  padding-left: 2.5em;
+}
+
+@media screen and (max-width: 1650px) {
+  .container-fav-recipes {
+    position: fixed;
+    top: -500px;
+    left: 0;
+    
+    width: 19%;
+    height: auto;
+    padding-left: 1em;
+    background-color: yellow;
   }
 }
 

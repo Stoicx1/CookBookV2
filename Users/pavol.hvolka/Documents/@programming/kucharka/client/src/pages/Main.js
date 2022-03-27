@@ -2,6 +2,7 @@
 import React, {useState, useEffect} from 'react'
 import Recipe from '../components/Recipe'
 import PaginationComponent from '../components/PaginationComponent'
+import FavRecipeComponent from '../components/FavRecipeComponent'
 
 const Main = () => {
 
@@ -19,6 +20,7 @@ const Main = () => {
     const [toFind, SetToFind] = useState('')
     const [pages, setPages] = useState([])
     const [actPage, setActPage] = useState(0)
+    const [favoriteRecipes, setFavoriteRecipes] = useState([])
     
     // *********************************************************************************
     // * GET Request / Filter data / List filtered recipes
@@ -63,6 +65,24 @@ const Main = () => {
     useEffect(() => {
         AutoFind()
     }, [toFind])
+
+    // *********************************************************************************
+    // * Sort recipes
+    // *********************************************************************************
+    // const sortData = (data) => {
+    //     const temp = data.sort(function(a, b) {
+    //         return (b.like_cnt - a.like_cnt)
+    //     })
+    //     console.log(temp)
+    // }
+
+    useEffect(() => {
+        const temp = [...materials]
+        temp.sort(function(a, b) {
+            return (b.like_cnt - a.like_cnt)
+        })
+        setFavoriteRecipes(temp)
+    }, [materials])
 
     // *********************************************************************************
     // * GET Request / Get all data / Full list of recipes from MongoDB
@@ -120,6 +140,7 @@ const Main = () => {
         setActPage(1)
     }, [toFind])
 
+
     // *********************************************************************************
     // * Render page / Main / List of recipes 
     // *********************************************************************************
@@ -164,6 +185,20 @@ const Main = () => {
                         pages.map((element, index) => {
                             return (
                                 <PaginationComponent eventClick={Pagination} key={index} name={index+1} />
+                            )
+                        })
+                    }
+                </div>
+            </div>
+
+            {/* Favorite recipes */}
+            <div className='container-fav-recipes'>
+                <div className='fav-recipe'>
+                    <h1>Top 10</h1>
+                    {   
+                        favoriteRecipes.map((element, index) => {
+                            return (
+                                <FavRecipeComponent eventClick={''} key={index} name={element.name} like_cnt={element.like_cnt} id={element._id} image={element.image} />
                             )
                         })
                     }

@@ -2,6 +2,7 @@
 import React, {useState, useEffect} from 'react'
 import ReactHtmlParser from 'react-html-parser'; 
 import { useParams } from 'react-router-dom';
+import Ingredients from '../components/Ingredients';
 
 const RecipeOverview = () => {
 
@@ -10,6 +11,7 @@ const RecipeOverview = () => {
   // *********************************************************************************
   const [recipe, SetRecipe] = useState([])
   const [refreshBit, SetRefreshBit] = useState(false)
+  const [recipeLoaded, SetRecipeLoaded] = useState(false)
   const { id } = useParams();
 
   // *********************************************************************************
@@ -61,46 +63,57 @@ const RecipeOverview = () => {
     <div className='container-content overview' > 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
 
-      <h2>{recipe.name}</h2>
-      <h2>{recipe.subName}</h2>
+      <h1>{recipe.name}</h1>
+      <h2>{recipe.subname}</h2>
       <br></br>
 
       <div className='container-main'>
-        {/* image */}
-        <div className='container-img'>
-          <img src={recipe.image} alt={recipe.name} ></img>
-        </div>
         
-        {/* params of recipe */}
-        <div  className='container-icons'>
-
-          <div className='container-icon'>
-            <i className="material-icons">&#xe855;</i>
-            <div>{recipe.duration+'min'}</div>
+        <div className='left'>
+          {/* image */}
+          <div className='container-img'>
+            <img src={recipe.image} alt={recipe.name} ></img>
           </div>
-
-          <div className='container-icon'>
-            <i className="material-icons">&#xe7ef;</i>
-            <div>{recipe.like_cnt}</div>
+          {/* params of recipe */}
+          <div  className='container-icons'>
+            <div className='container-icon'>
+              <i className="material-icons">&#xe855;</i>
+              <div>{recipe.duration+'min'}</div>
+            </div>
+            <div className='container-icon'>
+              <i class="material-icons">&#xe8dc;</i>
+              <div>{recipe.like_cnt}</div>
+            </div>
+            <div className='container-icon'>
+              <i className="material-icons">&#xea3c;</i>
+              <div>{recipe.difficulty}</div>
+            </div>
           </div>
+        </div>
 
-          <div className='container-icon'>
-            <i className="material-icons">&#xea3c;</i>
-            <div>{recipe.difficulty}</div>
+        <div className='right'>
+          {/* Show recipe description from HTML format / Parsing data */}
+          <div>
+            <p>{ ReactHtmlParser(recipe.describtion) }</p>
           </div>
+          {/* Show recipe description from HTML format / Parsing data */}
+          <div className='btn'>
+            <button onClick={event => LikeMe()} >Like me</button>
+          </div>
+        </div>
 
-        </div>  
+      </div>
+
+      {/* Ingrediencie */}
+      <div>
+        <Ingredients recept={recipe} />
       </div>
       
-      {/* Show recipe description from HTML format / Parsing data */}
-      <div>
-        <p>{ ReactHtmlParser(recipe.describtion) }</p>
-      </div>
+      
+      
+      
 
-      {/* Show recipe description from HTML format / Parsing data */}
-      <div>
-        <button onClick={event => LikeMe()} >Like me</button>
-      </div>
+      
 
     </div>
   )
