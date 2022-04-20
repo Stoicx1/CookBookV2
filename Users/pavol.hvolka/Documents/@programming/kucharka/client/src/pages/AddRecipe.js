@@ -30,27 +30,42 @@ const AddRecipe = () => {
   // *********************************************************************************
   const Submit = () => {
     // Post request options
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          name: name,
-          subname: subname,
-          image: image,
-          duration: duration,
-          like_cnt: 0,
-          difficulty: difficulty,
-          describtion: description,
-          materials: materials
+    if (CheckFormValidity()) {
+      const requestOptions = {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ 
+            name: name,
+            subname: subname,
+            image: image,
+            duration: duration,
+            like_cnt: 0,
+            difficulty: difficulty,
+            describtion: description,
+            materials: materials
+          })
+      };
+      // Fetch post request
+      fetch('http://localhost:5000/save-recipe', requestOptions)
+        .then(res => {
+          //alert('saved to DB')
         })
-    };
-    // Fetch post request
-    fetch('http://localhost:5000/save-recipe', requestOptions)
-      .then(res => {
-        //alert('saved to DB')
-      })
+      } else {
+        // nothing
+      }
   }  
-  // Update list of materials from mongoDB
+
+  const CheckFormValidity = () => {
+    if (name && subname && image && (duration>0) && (difficulty) && (description) && (materials.length>0) ) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  // *********************************************************************************
+  // * Update of ingredient list
+  // *********************************************************************************
   const UpdateMaterials = () => {
     fetch('http://localhost:5000/get-material')
       .then(res => res.json())
@@ -92,7 +107,7 @@ const AddRecipe = () => {
   const SubmitAddIngredient = (event) => {
     event.preventDefault()
     // Length of ingredient's name must be more than 3
-    if (ingredient.length>3) {
+    if (ingredient.length>2) {
       // Post request options
       const requestOptions = {
         method: 'POST',

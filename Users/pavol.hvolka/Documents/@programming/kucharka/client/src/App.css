@@ -703,11 +703,12 @@ fieldset {
   text-align: center;
 }
 #container-material-input {
-  align-content: space-around;
 }
 #material-input {
   display: inline-flex;
-  width: auto;
+  position: relative;
+  min-width: 5%;
+  max-width: 50%;
   color: var(--textColor);
   padding: 0px 10px 0px 10px;
   cursor: pointer;

@@ -194,12 +194,14 @@ const Main = () => {
             {/* Favorite recipes */}
             <div className='container-fav-recipes'>
                 <div className='fav-recipe'>
-                    <h1>Top 10</h1>
+                    <h1>Top 5</h1>
                     {   
                         favoriteRecipes.map((element, index) => {
-                            return (
-                                <FavRecipeComponent eventClick={''} key={index} name={element.name} like_cnt={element.like_cnt} id={element._id} image={element.image} />
-                            )
+                            if (index<5) {
+                                return (
+                                    <FavRecipeComponent eventClick={''} key={index} name={element.name} like_cnt={element.like_cnt} id={element._id} image={element.image} />
+                                )
+                            }
                         })
                     }
                 </div>
