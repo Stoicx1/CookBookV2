@@ -58,14 +58,18 @@ const RecipeOverview = () => {
   // * POST Req - Delete recept from mongoDB
   // *********************************************************************************
   const DeleteRecept = () => {
-    // Post request options
-    const requestOptions = {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' }
-    };
-    // Fetch post request
-    fetch('http://localhost:5000/recipe/'+recipe._id, requestOptions)
-      .then(window.location.assign('/'))
+    if (window.confirm('Do you realy want to remove this recipe?')) {
+      // Post request options
+      const requestOptions = {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' }
+      };
+      // Fetch post request
+      fetch('http://localhost:5000/recipe/'+recipe._id, requestOptions)
+        .then(window.location.assign('/'))
+    } else {
+      // nothing
+    }
   } 
 
   // *********************************************************************************

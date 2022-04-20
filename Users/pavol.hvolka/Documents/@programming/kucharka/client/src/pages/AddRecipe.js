@@ -155,15 +155,20 @@ const AddRecipe = () => {
   // *********************************************************************************
   const DeleteRecipeMaterialDB = (id) => event => {
     // Post request options
-    const requestOptions = {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' }
-    };
-    // Fetch delete request with id param
-    fetch('http://localhost:5000/material/'+id, requestOptions)
-      .then(data => {
-        UpdateMaterials()
-      })
+    if (window.confirm('Do you realy want to remove this ingredient?')){
+      const requestOptions = {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' }
+      };
+      // Fetch delete request with id param
+      fetch('http://localhost:5000/material/'+id, requestOptions)
+        .then(data => {
+          UpdateMaterials()
+        })
+    } else {
+      // nothing
+    }
+    
   }
 
   // Update after refresh
