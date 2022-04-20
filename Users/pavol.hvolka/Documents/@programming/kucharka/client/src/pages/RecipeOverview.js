@@ -38,8 +38,7 @@ const RecipeOverview = () => {
   // *********************************************************************************
   // * POST Req - Update like_cnt couter in mongodb
   // *********************************************************************************
-  
-  const LikeMe = async () => {
+  const LikeRecept = async () => {
     // Post request options
     const requestOptions = {
         method: 'POST',
@@ -53,8 +52,21 @@ const RecipeOverview = () => {
       .then(() => {
         SetRefreshBit(true)
       })
-      
   }  
+
+  // *********************************************************************************
+  // * POST Req - Delete recept from mongoDB
+  // *********************************************************************************
+  const DeleteRecept = () => {
+    // Post request options
+    const requestOptions = {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' }
+    };
+    // Fetch post request
+    fetch('http://localhost:5000/recipe/'+recipe._id, requestOptions)
+      .then(window.location.assign('/'))
+  } 
 
   // *********************************************************************************
   // * Render page / View of choosen recipe from the main list 
@@ -98,7 +110,10 @@ const RecipeOverview = () => {
           </div>
           {/* Show recipe description from HTML format / Parsing data */}
           <div className='btn'>
-            <button onClick={event => LikeMe()} >Like me</button>
+            <button onClick={event => LikeRecept()} >Like</button>
+          </div>
+          <div className='btn'>
+            <button onClick={event => DeleteRecept()} >Delete</button>
           </div>
         </div>
 
@@ -108,12 +123,6 @@ const RecipeOverview = () => {
       <div>
         <Ingredients recept={recipe} />
       </div>
-      
-      
-      
-      
-
-      
 
     </div>
   )

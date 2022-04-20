@@ -4,6 +4,13 @@ import {Editor} from '@tinymce/tinymce-react'
 const AddRecipe = () => {
 
   // *********************************************************************************
+    // * Variables
+    // *********************************************************************************
+    let urlGetFind = 'http://localhost:5000/find-material/'
+    let urlGetAll = 'http://localhost:5000/get-recipe/'
+    let urlDelID = 'http://localhost:5000/recipe/'
+
+  // *********************************************************************************
   // * UseStates
   // *********************************************************************************
   const [name, setName] = useState('')
@@ -13,13 +20,15 @@ const AddRecipe = () => {
   const [difficulty, setDifficulty] = useState('')
   const [description, setDescription] = useState('');
   const [materials, setMaterials] = useState([])
+  const [ingredient, setIngredient] = useState('')
+  const [toFind, SetToFind] = useState('')
 
   const [materialShowList, setMaterialShowList] = useState([])
 
   // *********************************************************************************
   // * POST Request / post new recipe / On click submit button / event
   // *********************************************************************************
-  const Submit = async () => {
+  const Submit = () => {
     // Post request options
     const requestOptions = {
         method: 'POST',
@@ -36,17 +45,71 @@ const AddRecipe = () => {
         })
     };
     // Fetch post request
-    const response = await fetch('http://localhost:5000/save-recipe', requestOptions)
-    const data = await response.json()
+    fetch('http://localhost:5000/save-recipe', requestOptions)
+      .then(res => {
+        //alert('saved to DB')
+      })
   }  
-
-  useEffect( () => {
+  // Update list of materials from mongoDB
+  const UpdateMaterials = () => {
     fetch('http://localhost:5000/get-material')
       .then(res => res.json())
       .then(data => {
         setMaterialShowList(data)
       })
-  }, [])
+  }
+
+  // *********************************************************************************
+  // * AUTO Filter of ingredients
+  // *********************************************************************************
+
+  const AutoFind = () => {
+    console.log(toFind)
+    fetch(urlGetFind+toFind)
+        .then(res => {
+            if (res.ok) {
+                return res.json()
+            } 
+            UpdateMaterials()
+            throw new Error('Something went wrong')
+        })
+        .then(data => {
+            console.log(data)
+            setMaterialShowList(data)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+  }
+
+  useEffect(() => {
+      AutoFind()
+  }, [toFind])
+
+  // *********************************************************************************
+  // * POST Request / post new ingredient / On click submit button / event
+  // *********************************************************************************
+  const SubmitAddIngredient = (event) => {
+    event.preventDefault()
+    // Length of ingredient's name must be more than 3
+    if (ingredient.length>3) {
+      // Post request options
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          name: ingredient
+        })
+      };
+      // Fetch post request
+      fetch('http://localhost:5000/save-material', requestOptions)
+        .then(res => {
+          UpdateMaterials()
+          setIngredient('')
+        })
+    }
+
+  }
 
   // *********************************************************************************
   // * Updating material values
@@ -71,6 +134,31 @@ const AddRecipe = () => {
     newArr.splice(0, 1)
     setMaterials(newArr)
   }
+
+  // *********************************************************************************
+  // * Delete material from mongoDB
+  // *********************************************************************************
+  const DeleteRecipeMaterialDB = (id) => event => {
+    // Post request options
+    const requestOptions = {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' }
+    };
+    // Fetch delete request with id param
+    fetch('http://localhost:5000/material/'+id, requestOptions)
+      .then(data => {
+        UpdateMaterials()
+      })
+  }
+
+  // Update after refresh
+  useEffect( () => {
+    UpdateMaterials()
+  }, [])
+  // Update after change of material list
+  useEffect(() => {
+    ;
+  }, materialShowList)
 
   // *********************************************************************************
   // * Render page / AddRecipe
@@ -152,6 +240,7 @@ const AddRecipe = () => {
                         <option value="PL" >PL</option>
                         <option value="CL" >CL</option>
                         <option value="pcs">pcs</option>
+                        <option value="~">~</option>
                       </select>
                       <i key={'icon'+index} className="material-icons" onClick={DeleteRecipeMaterial(index)} >delete</i>
                     </div>
@@ -163,18 +252,31 @@ const AddRecipe = () => {
           </div>
         </form>
         
+        <form className='form-add-ingredient'>
+          <input type="text" placeholder='add ingredient'  onChange={event => setIngredient(event.target.value)} ></input>
+          <input className='form-add-ingredient-submit' type="submit" value="submit"  onClick={event => SubmitAddIngredient(event)} ></input>
+        </form> 
+
+        <form className='form-add-ingredient'>
+          <input type="text" placeholder='filter'  onChange={event => SetToFind(event.target.value)} ></input>
+          <input className='form-add-ingredient-submit' type="submit" value="submit"  onChange={event => SetToFind(event.target.value)} ></input>
+        </form> 
+
         <div id='container-material-input'>
           {
             materialShowList.map((material, index) => {
               return (
-                <div id='material-input'  value={material._id} name={material.name}  key={index} 
-                onClick={() => AddIngredientToRecipe(material._id, material.name, material.amount)}>{material.name}
+                <div id='material-input'>
+                  <div value={material._id} name={material.name}  key={index} 
+                    onClick={() => AddIngredientToRecipe(material._id, material.name, material.amount)}>{material.name}
+                  </div>
+                  <i key={'icon'+index} className="material-icons icon-delete-material" onClick={DeleteRecipeMaterialDB(material._id)} >delete</i>
                 </div>
+                
               )
             })
           }  
         </div>
-        
     </div>
   )
 }

@@ -443,26 +443,23 @@ img {
   margin-bottom: 1em;
 }
 .overview .container-main .btn {
-  width: 130px;
-  height: 50px;
-  margin: auto;
+  display: inline;
+  text-align: center;
 }
 .overview .container-main button {
-  width: 130px;
+  text-align: center;
+  width: 100px;
   height: 50px;
   margin: auto;
-  margin-top: 1em;
   border: 1px solid white;
   background-color: var(--BG1);
   color: white;
   font-size: 20px;
-  
 }
 .overview .container-main button:hover {
-  width: 130px;
+  width: 100px;
   height: 50px;
   margin: auto;
-  margin-top: 1em;
   border: 1px solid var(--textColor);
   background-color: white;
   color: var(--textColor);
@@ -555,7 +552,7 @@ img {
 #contact {
   background: #F9F9F9;
   padding: 15px;
-  margin: 40px 0;
+  margin: 10px 0;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
@@ -680,10 +677,34 @@ fieldset {
   color: #888;
 }
 
+
+
+/* 
+  *****************************************
+  Form style - add new recipe page
+  searching and adding new ingredients
+  material list style
+  *****************************************
+*/
+.form-add-ingredient {
+  display: inline-flex;
+  padding-left: 1em;
+  padding: 1em;
+}
+.form-add-ingredient input {
+  height: 3em;
+  width: 20em;
+  text-align: center;
+  font-size: 12px;
+}
+.form-add-ingredient-submit:last-child {
+  height: 3em;
+  width: 7em;
+  text-align: center;
+}
 #container-material-input {
   align-content: space-around;
 }
-
 #material-input {
   display: inline-flex;
   width: auto;
@@ -692,12 +713,23 @@ fieldset {
   cursor: pointer;
   border: 1px solid var(--BG1);
   margin: 2px;
+  padding-top: 6px;
+}
+.icon-delete-material {
+  position: relative;
+  top: -.1em;
+  padding-bottom: .2em;
+  padding-left: 1em;
 }
 
 
 
 
-
+/* 
+  *****************************************
+  xxx
+  *****************************************
+*/
 
 .field {
   padding: .5em;
@@ -710,7 +742,7 @@ fieldset {
 .field .ingredient-name {
   width: 500px;
   text-align: end;
-  padding-top: .4em;
+  padding-top: .9em;
   padding-right: .5em;
 }
 .field .ingredient-amount {
@@ -785,7 +817,11 @@ fieldset {
 }
 
 
-
+/* 
+  *****************************************
+  TOP 10 favorite recipes 
+  *****************************************
+*/
 
 .container-fav-recipes {
   position: fixed;
@@ -829,13 +865,15 @@ fieldset {
   .container-fav-recipes {
     position: fixed;
     top: -500px;
-    left: 0;
+    left: -200px;
     
-    width: 19%;
+    width: 0;
     height: auto;
     padding-left: 1em;
     background-color: yellow;
   }
 }
+
+
 
 

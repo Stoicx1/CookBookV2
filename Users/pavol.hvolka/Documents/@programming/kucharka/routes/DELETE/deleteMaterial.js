@@ -1,10 +1,10 @@
 const express = require('express')
 const router = express.Router()
-const modelRecipe = require('../../models/recipe')
-const deleteRecipe = express()
+const modelMaterial = require('../../models/material')
+const deleteMaterial = express()
 
-deleteRecipe.delete('/recipe/:id', (req, res) => {
-    modelRecipe.findByIdAndDelete({_id: req.params.id})
+deleteMaterial.delete('/material/:id', (req, res) => {
+    modelMaterial.findByIdAndDelete({_id: req.params.id})
         .then(result => {
             console.log(result)
             res.status(200).json({
@@ -22,4 +22,4 @@ deleteRecipe.delete('/recipe/:id', (req, res) => {
         
 })
 
-module.exports = deleteRecipe
+module.exports = deleteMaterial

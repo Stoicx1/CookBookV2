@@ -12,8 +12,6 @@ const FavRecipeComponent = (props) => {
           <div className='top10-description like-cnt'>{props.like_cnt}</div> 
         </div>
       </div>
-      
-
     </Link>
     
   )
