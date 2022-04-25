@@ -73,6 +73,13 @@ const RecipeOverview = () => {
   } 
 
   // *********************************************************************************
+  // * POST Req - Update recept from mongoDB
+  // *********************************************************************************
+  const UpdateRecept = () => {
+    
+  } 
+
+  // *********************************************************************************
   // * Render page / View of choosen recipe from the main list 
   // *********************************************************************************
   return (
@@ -119,9 +126,14 @@ const RecipeOverview = () => {
           <div className='btn'>
             <button onClick={event => DeleteRecept()} >Delete</button>
           </div>
+          <div className='btn'>
+            <button onClick={event => UpdateRecept()} >Update</button>
+          </div>
         </div>
 
       </div>
+
+      
 
       {/* Ingrediencie */}
       <div>

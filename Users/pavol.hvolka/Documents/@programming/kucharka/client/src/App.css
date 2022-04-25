@@ -875,6 +875,30 @@ fieldset {
   }
 }
 
+.wrapper-count-ingredient {
+  width: 100%;
+  display: block;
+  float: left;
+ }
+.container-count-ingredient {
+  display: block;
+  float: right;
+}
+.container-ingredient p {
+  padding-right: 1em;
+  display: inline;
+}
+
+.container-ingredient input {
+  
+  width: 40%;
+  font-size: large;
+  border: 1px solid #ccc;
+  background: #FFF;
+  margin: 0 0 5px;
+  padding: 5px;
+}
+
 
 
 
