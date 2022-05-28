@@ -879,6 +879,7 @@ fieldset {
   width: 100%;
   display: block;
   float: left;
+  margin-top: 1em;
  }
 .container-count-ingredient {
   display: block;
@@ -890,7 +891,6 @@ fieldset {
 }
 
 .container-ingredient input {
-  
   width: 40%;
   font-size: large;
   border: 1px solid #ccc;
